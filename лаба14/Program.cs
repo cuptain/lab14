@@ -20,12 +20,12 @@ namespace лаба14
                 var sw = Use.Menu("Выберите действие:", menu);
                 switch (sw)
                 {
-                    case 1:
+                    case 0:
                         colFirst.AddDefault();
                         colSecond.AddDefault();
                         Easy.Continue();
                         break;
-                    case 2:
+                    case 1:
                         colFirst.Remove(1);
                         colSecond.Remove(1);
                         if (colFirst.Count == 0 || colSecond.Count == 0)
@@ -35,23 +35,20 @@ namespace лаба14
                             return;
                         }
                         else
-                        {
                             Easy.Continue();
-                        }
                         break;
-                    case 3:
+                    case 2:
                         Console.WriteLine("Очереди до иземенений: ");
                         colFirst.Show();
                         colSecond.Show();
                         colFirst[1] = Worker.GetSelf;
                         colSecond[1] = Engineer.GetSelf;
-
                         Console.WriteLine("Очереди после изменений: ");
                         colFirst.Show();
                         colSecond.Show();
                         Easy.Continue();
                         break;
-                    case 4:
+                    case 3:
                         return;
                 }
             }

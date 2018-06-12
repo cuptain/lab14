@@ -57,7 +57,7 @@ namespace лаба14
                 }
                 if (CollectionCountChanged != null)
                 {
-                    OnCollectionCountChanged(this, new CollectionHandlerEventArgs(CollectionName, "Добавление.", base[i].Data));
+                    OnCollectionCountChanged(this, new CollectionHandlerEventArgs(CollectionName, "добавление", base[i].Data));
                 }
             }
         }
@@ -74,13 +74,13 @@ namespace лаба14
                 CollectionReferenceChanged(source, args);
         }
 
-        public new Person this[int index] //
+        public new Person this[int index] //Изменение ссылки
         {
             get => base[index].Data;
             set
             {
                 base[index].Data = value;
-                OnCollectionReferenceChanged(this, new CollectionHandlerEventArgs(CollectionName, "Изменение ссылки.", base[index].Data));
+                OnCollectionReferenceChanged(this, new CollectionHandlerEventArgs(CollectionName, "изменение ссылки", base[index].Data));
             }
         }
 
@@ -92,30 +92,14 @@ namespace лаба14
 
             Random rnd = new Random();
             int index = rnd.Next(1, base.Capacity - 7);
-            if (base.Add(Worker.GetSelf, index))
+            if (Add(Worker.GetSelf, index))
             {
-                OnCollectionCountChanged(this, new CollectionHandlerEventArgs(CollectionName, "Добавление.", base[index - 1].Data));
+                OnCollectionCountChanged(this, new CollectionHandlerEventArgs(CollectionName, "добавление", base[index - 1].Data));
             }
             else
             {
                 Console.WriteLine("Индекс неверен!");
             }
-            Console.WriteLine("\nОчередь после изменений:");
-            Show();
-        }
-
-        public void Add(Person[] array) //Добавление элемента
-        {
-            Console.WriteLine("Текущая очередь:");
-            Show();
-            Console.WriteLine("\n");
-
-            foreach (Person person in array)
-            {
-                base.Enqueue(person);
-                OnCollectionCountChanged(this, new CollectionHandlerEventArgs(CollectionName, "Добавление", base[Count - 1].Data));
-            }
-
             Console.WriteLine("\nОчередь после изменений:");
             Show();
         }
@@ -129,29 +113,17 @@ namespace лаба14
             MyQueue<Person> clone = Clone();
 
             if (base.Remove(index))
-                OnCollectionCountChanged(this, new CollectionHandlerEventArgs(CollectionName, "Удаление.", clone[index - 1].Data));
+                OnCollectionCountChanged(this, new CollectionHandlerEventArgs(CollectionName, "удаление", clone[index - 1].Data));
             else
                 Console.WriteLine("Индекс неверен!");
 
             if (Count == 0)
-                Console.WriteLine("Очередь опустела!");
+                Console.WriteLine("Очередь пуста");
             else
             {
                 Console.WriteLine("\nОчередь после изменений:");
                 Show();
             }
-        }
-
-        public void Indexes(int index)
-        {
-            Console.WriteLine("Текущая очередь:");
-            Show();
-            Console.WriteLine("\n");
-
-            base[index].Data = IPersonCreate.CreateElement<Worker>();
-
-            Console.WriteLine("\nОчередь после изменений:");
-            Show();
         }
 
         public void Show() //Вывод коллекции

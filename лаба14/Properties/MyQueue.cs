@@ -152,16 +152,12 @@ namespace Hierarchy
             if (beg != null)
             {
                 while (beg.Next != null)
-                {
                     beg = beg.Next;
-                }
                 add.Next = beg.Next;
                 beg.Next = add;
             }
             else
-            {
                 QueueElement = add;
-            }
         }
 
         public T Peek() //Возвращает значение элемента
@@ -184,10 +180,8 @@ namespace Hierarchy
         public MyQueue<T> Clone() //Клонирование
         {
             MyQueue<T> newQueue = new MyQueue<T>(Capacity);
-            foreach (T cloneElement in this)
-            {
-                newQueue.Enqueue(cloneElement);
-            }
+            foreach (QueueElement <T> cloneElement in this)
+                newQueue.Enqueue(cloneElement.Data);
 
             return newQueue;
         }
@@ -282,6 +276,6 @@ namespace Hierarchy
         }
 
         // Текущий элемент
-        public object Current => currElement.Data;
+        public object Current => currElement;
     }
 }
