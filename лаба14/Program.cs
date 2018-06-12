@@ -60,28 +60,27 @@ namespace лаба14
 
         static void Main(string[] args)
         {
-            string[] menu = {
-                "Пересоздать коллекции", "Показать коллекции", "Показать журнал", "Действия над коллекциями", "Выход"
-            };
-            var k = 3;
+            string[] menu = {"Пересоздать коллекции", "Показать коллекции", "Показать журнал", "Действия над коллекциями", "Выход"};
+            int k = 0;
 
             colFirst.CollectionCountChanged += new CollectionHandler(jColFirst.CollectionCountChanged);
             colFirst.CollectionReferenceChanged += new CollectionHandler(jColFirst.CollectionReferenceChanged);
-
-
             colSecond.CollectionCountChanged += new CollectionHandler(jColSecond.CollectionCountChanged);
             colSecond.CollectionReferenceChanged += new CollectionHandler(jColSecond.CollectionReferenceChanged);
 
+            colFirst.Filling();
+            colSecond.Filling();
+
             while (true)
             {
-                var sw = Use.Menu(k,"Выберите действие:", menu);
+                var sw = Use.Menu(k, "Выберите действие:", menu);
                 switch (sw)
                 {
                     case 1:
                         colFirst.Filling();
                         colSecond.Filling();
-                        k = 0;
                         Easy.Continue();
+                        k = 0;
                         break;
                     case 2:
                         colFirst.Show();

@@ -60,7 +60,7 @@ namespace Hierarchy
             return false;
         } 
 
-        public QueueElement<T> this[int index] //Индекс элементаы
+        public QueueElement<T> this[int index] //Индекс элемента
         {
             get
             {
