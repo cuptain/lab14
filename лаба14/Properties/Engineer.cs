@@ -73,7 +73,7 @@ namespace Hierarchy
 
         public new Person BasePerson => new Person(name, surname);
 
-        public new static IPerson GetSelf => IPersonCreate.CreateElement<Engineer>();
+        public new static Person GetSelf => IPersonCreate.CreateElement<Engineer>();
 
         public override string ToString()
         {

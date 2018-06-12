@@ -97,7 +97,7 @@ namespace Hierarchy
         }
         public new Person BasePerson => new Person(name, surname);
 
-        public new static IPerson GetSelf => IPersonCreate.CreateElement<Administration>();
+        public new static Person GetSelf => IPersonCreate.CreateElement<Administration>();
 
         public override string ToString()
         {

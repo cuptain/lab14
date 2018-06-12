@@ -78,7 +78,7 @@ namespace Hierarchy
             return false;
         }
 
-        public static IPerson CreateElement<T>()
+        public static Person CreateElement<T>()
         {
             if (typeof(T) == typeof(Administration))
                 return new Administration(random_name[Rnd.Next(0, random_name.Length)],

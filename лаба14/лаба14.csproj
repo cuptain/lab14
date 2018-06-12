@@ -42,8 +42,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Journal.cs" />
+    <Compile Include="JournalEntry.cs" />
+    <Compile Include="MyNewCollection.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="Properties\Administration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Engineer.cs" />
+    <Compile Include="Properties\funcs.cs" />
+    <Compile Include="Properties\IPerson.cs" />
+    <Compile Include="Properties\IPersonCreate.cs" />
+    <Compile Include="Properties\menus.cs" />
+    <Compile Include="Properties\MyQueue.cs" />
+    <Compile Include="Properties\Person.cs" />
+    <Compile Include="Properties\Worker.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

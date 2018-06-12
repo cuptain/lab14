@@ -1,15 +1,99 @@
 ﻿using System;
 using System.Collections;
 
-namespace лаба12
+namespace Hierarchy
 {
     public class MyQueue<T> : IEnumerable
     {
-        public int Capacity { get; private set; }
+        public int Capacity { get; private set; } //Вместимость
 
-        public int Count { get; private set; }
+        public int Count { get; private set; } //Кол-во элементов
 
-        internal QueueElement<T> QueueElement;
+        internal QueueElement<T> QueueElement; //Элемент очереди
+
+        public bool Add(T person, int index) //Добавить элемент
+        {
+            if (index <= Count)
+            {
+                if (Count == index)
+                {
+                    Enqueue(person);
+                }
+                else
+                {
+                    QueueElement<T> nextElement = this[index];
+                    this[index - 1].Next = new QueueElement<T>(person);
+                    this[index].Next = nextElement;
+                }
+
+                if (++Count == Capacity)
+                {
+                    Capacity *= 2;
+                }
+
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public bool Remove(int index) //Удалить элемент
+        {
+            if (index <= Count)
+            {
+                if (index == Count)
+                {
+
+                    this[index] = null;
+                }
+                else
+                {
+                    this[index - 1].Next = this[index].Next;
+                }
+
+                Count--;
+                return true;
+            }
+
+            return false;
+        } 
+
+        public QueueElement<T> this[int index] //Индекс элементаы
+        {
+            get
+            {
+                if (index < Count)
+                {
+                    int count = 0;
+                    foreach (var element in this)
+                    {
+                        if (count == index) return (QueueElement<T>)element;
+                        count++;
+                    }
+                }
+                else Console.WriteLine("Индекс неверен!");
+                return null;
+            }
+            set
+            {
+                if (index < Count)
+                {
+                    QueueElement<T> root = QueueElement;
+                    for (var count = 0; count <= Count; count++)
+                    {
+                        if (count == index)
+                        {
+                            root = value;
+                            break;
+                        }
+                        else root = root.Next;
+                    }
+                }
+                else Console.WriteLine("Индекс неверен!");
+            }
+        }
 
         #region Constructors
 
@@ -37,26 +121,21 @@ namespace лаба12
 
         #region Methods
 
-        public bool Contains(object queueElement)
+        public bool Contains(object queueElement) //Проверить содержание
         {
             foreach (var queue in this)
-            {
                 if (queue.Equals(queueElement))
-                {
                     return true;
-                }
-            }
-
             return false;
         }
 
-        public void Clear()
+        public void Clear() //Очистить
         {
             Count = 0;
             QueueElement = null;
         }
 
-        public T Dequeue()
+        public T Dequeue() //Исключить из очереди
         {
             Count--;
             T data = QueueElement.Data;
@@ -64,7 +143,7 @@ namespace лаба12
             return data;
         }
 
-        public void Enqueue(T addElement)
+        public void Enqueue(T addElement) //Включить в очередь
         {
             Count++;
             Capacity *= Count == Capacity ? 2 : 1;
@@ -85,12 +164,12 @@ namespace лаба12
             }
         }
 
-        public T Peek()
+        public T Peek() //Возвращает значение элемента
         {
             return QueueElement.Data;
         }
 
-        public T[] ToArray()
+        public T[] ToArray() //Преобразование в массив
         {
             T[] array = new T[0];
             foreach (T add in this)
@@ -102,7 +181,7 @@ namespace лаба12
             return array;
         }
 
-        public MyQueue<T> Clone()
+        public MyQueue<T> Clone() //Клонирование
         {
             MyQueue<T> newQueue = new MyQueue<T>(Capacity);
             foreach (T cloneElement in this)
@@ -113,7 +192,7 @@ namespace лаба12
             return newQueue;
         }
 
-        public void CopyTo(out T[] array, int arrayIndex)
+        public void CopyTo(out T[] array, int arrayIndex) //Копирование
         {
             array = new T[arrayIndex];
             int i = 0;
@@ -130,13 +209,13 @@ namespace лаба12
 
         #endregion
 
-        public IEnumerator GetEnumerator()
+        public IEnumerator GetEnumerator() 
         {
             return new ClassEnumerator<T>(this);
         }
     }
 
-    internal class QueueElement<T>
+    public class QueueElement<T> //Класс элемента
     {
         public T Data; //информационное поле 
         public QueueElement<T> Next; //адресное поле 
@@ -165,13 +244,13 @@ namespace лаба12
         }
     }
 
-    internal class ClassEnumerator<T> : IEnumerator
+    public class ClassEnumerator<T> : IEnumerator
     {
-        private int _position = -1;
-        private readonly MyQueue<T> _t;
-        private QueueElement<T> currElement;
+        private int _position = -1; //Начальная позиция
+        private readonly MyQueue<T> _t; //Очередь
+        private QueueElement<T> currElement; //Текущий элемент
 
-        public ClassEnumerator(MyQueue<T> t)
+        public ClassEnumerator(MyQueue<T> t) //Конструктор с параметрами
         {
             _t = t;
             currElement = _t.QueueElement;

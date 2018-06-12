@@ -49,7 +49,7 @@ namespace Hierarchy
         public new Person BasePerson => new Person(name, surname);
 
         //Создание рабочего
-        public new static IPerson GetSelf => IPersonCreate.CreateElement<Worker>();
+        public new static Person GetSelf => IPersonCreate.CreateElement<Worker>();
 
         //Конструктор от рабочего
         public Worker(Worker worker) : base(worker.BasePerson)

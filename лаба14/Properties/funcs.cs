@@ -134,6 +134,14 @@ namespace Libriary
             a = b;
             b = tmp;
         }
+
+        //Промежуточная функция
+        public static void Continue()
+        {
+            Console.WriteLine("\nДля продолжения нажмите клавишу Enter...");
+            Console.CursorVisible = false;
+            Console.ReadLine();
+        }
     }
 
     public class OutputArrays
